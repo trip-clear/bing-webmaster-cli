@@ -1,0 +1,7 @@
+bin/
+
+# 認証情報は絶対にコミットしない
+config.json
+*apikey*
+*api-key*
+.DS_Store
