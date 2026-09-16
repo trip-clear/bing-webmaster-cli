@@ -6,33 +6,23 @@ Bing Webmaster Tools API をターミナルから叩く CLI（Go 製）。検索
 
 ## インストール
 
-必要なもの: Go 1.26.5 以上（これ未満でもツールチェーンが自動で落ちてくる）と、GitHub の `trip-clear` org への read 権限。
+必要なもの: Go 1.26.5 以上（これ未満でもツールチェーンが自動で落ちてくる）。
 
-### GitHub から（推奨）
-
-private リポジトリなので、**初回だけ** 「公開プロキシを経由せず SSH で直接取りに行く」設定を Go と git に入れる。
+### go install（推奨）
 
 ```bash
-# 1回だけ
-go env -w GOPRIVATE=github.com/trip-clear/*
-git config --global url."git@github.com:".insteadOf "https://github.com/"
-
-# インストール（~/go/bin/bwt に入る）
 go install github.com/trip-clear/bing-webmaster-cli/cmd/bwt@latest
 
 bwt --version
 ```
 
-- `GOPRIVATE` は proxy.golang.org と sum.golang.org を迂回させる設定。private リポジトリはそこに存在しないため、**これがないと 410 Gone や checksum mismatch で落ちる**。
-- `insteadOf` は go が `https://` で clone しに行くのを SSH に差し替える。GitHub に SSH 鍵を登録済みであること（`ssh -T git@github.com` で確認）。
 - `~/go/bin`（正確には `go env GOPATH`/bin）が PATH に入っていること。入っていなければ `export PATH="$(go env GOPATH)/bin:$PATH"` を shell の rc に足す。
-
-更新は同じコマンドを再実行するだけ。バージョン固定なら `@v0.1.0` のようにタグを指定する。
+- 更新は同じコマンドを再実行するだけ。バージョン固定なら `@v0.1.0` のようにタグを指定する。
 
 ### ソースから
 
 ```bash
-git clone git@github.com:trip-clear/bing-webmaster-cli.git
+git clone https://github.com/trip-clear/bing-webmaster-cli.git
 cd bing-webmaster-cli
 
 make install          # ~/.local/bin/bwt に入る（PREFIX=/usr/local で変更可）
