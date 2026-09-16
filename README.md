@@ -24,7 +24,10 @@ bwt --version
 ```
 
 - `GOPRIVATE` は proxy.golang.org と sum.golang.org を迂回させる設定。private リポジトリはそこに存在しないため、**これがないと 410 Gone や checksum mismatch で落ちる**。
-- `~/go/bin`（正確には `go env GOPATH`/bin）が PATH に入っていること。
+- `insteadOf` は go が `https://` で clone しに行くのを SSH に差し替える。GitHub に SSH 鍵を登録済みであること（`ssh -T git@github.com` で確認）。
+- `~/go/bin`（正確には `go env GOPATH`/bin）が PATH に入っていること。入っていなければ `export PATH="$(go env GOPATH)/bin:$PATH"` を shell の rc に足す。
+
+更新は同じコマンドを再実行するだけ。バージョン固定なら `@v0.1.0` のようにタグを指定する。
 
 ### ソースから
 
